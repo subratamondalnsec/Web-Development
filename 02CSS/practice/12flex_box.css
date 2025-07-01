@@ -1,0 +1,30 @@
+#content{
+    height: 300px;
+    width: 50%;
+    background-color: azure;
+    margin: 10px auto;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-between;  */
+    justify-content: center;
+    /* flex-wrap: wrap; */
+    /* align-items: center; */
+    align-content: baseline;
+} 
+h1{
+    text-align: center;
+}
+#org{
+    align-self: flex-end;
+    /* flex-basis: 50px; */
+    /* flex-grow: 1; */
+    /* flex-shrink: 2; */
+}
+#content div{
+    height: 100px;
+    width: 300px;
+    text-align: center;
+    color: white;
+    font-size: 1.5em;
+}

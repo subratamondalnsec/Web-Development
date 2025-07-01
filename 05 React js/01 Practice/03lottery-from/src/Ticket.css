@@ -1,0 +1,11 @@
+.Ticket{
+    border: 1px solid aqua;
+    border-radius: 14px;
+    width: 300px;
+    margin: auto;
+    margin-bottom: 15px;
+}
+.para{
+    margin-top: 2px;
+    margin-bottom: 4px;
+}

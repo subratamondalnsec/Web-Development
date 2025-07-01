@@ -1,0 +1,37 @@
+#con{
+    height: 400px;
+    width: 400px;
+    border: 2px solid rgb(13, 166, 193);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+    border-radius: 20px;
+}
+.all{
+    height: 100px;
+    width: 100px;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: #a0aeae;
+    font-size: 50px;
+    text-align: center;
+}
+
+#bar{
+    height: 50px;
+    width: 900px;
+    display: flex;
+    border: 2px solid #169dd7;
+    background-color: pink;
+    border-radius: 10px;
+    
+}
+.manu{
+    height: 50px;
+    width: 80px;
+    font-size: 24px;
+    color: black;
+    align-content: space-evenly;
+}
+

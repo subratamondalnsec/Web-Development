@@ -1,0 +1,77 @@
+*{  /*  univesal selector */
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+h1,h3{ /*elment selector*/
+    color: #b92b27;
+}
+#login{
+    background-color: blue;
+    color: white;
+    border-radius:2cap;
+}
+
+#signup{
+    background-color:  #b92b27;
+    color: white;
+    border-radius:4cap;
+}
+
+.upvote{
+    border-radius:2cap;
+    background-color: rgb(31, 205, 65);
+    color:black
+}
+/*desendeent selector */
+p a{
+    color: purple;
+    background-color: yellow;
+}
+nav ul li{
+    color: aqua;
+}
+p+h3{/*sibling combinator*/
+    text-decoration: underline;
+}
+.upvote+button{
+    background-color: cornflowerblue;
+    border-radius:2cap;
+
+}
+div>input{
+    background-color: darkgray;
+}
+
+input[type="text"]{
+    color: red;
+}
+
+input[type="password"]{
+    color: rgb(20, 20, 248);
+}
+button:hover{
+    background-color: black;
+    color: white;
+}
+h3:hover{
+    text-decoration: none;
+}
+button:active{
+    background-color: pink;
+    color: black;
+}
+p:active{/*psedu class*/
+    font-weight: bold;
+    color: green;
+}
+input[type="radio"]:checked + label{
+    color: red;
+    font-weight:bold
+}
+h1::first-letter{
+    color:chartreuse;
+}
+p::first-line{
+    color: aqua;
+}
+

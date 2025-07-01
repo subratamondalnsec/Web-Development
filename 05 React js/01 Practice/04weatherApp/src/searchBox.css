@@ -1,0 +1,39 @@
+.searchBox-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center;
+    height: 100vh; Full viewport height */
+    text-align: center;
+}
+
+.searchBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.searchBox .MuiOutlinedInput-root {
+    color: white; /* Text color */
+    border-color: white;
+}
+
+.searchBox .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline {
+    border-color: white; /* Outline color */
+}
+
+.searchBox .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline {
+    border-color: white; /* Outline color on hover */
+}
+
+.searchBox .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border-color: white; /* Outline color when focused */
+}
+
+.searchBox .MuiInputLabel-root {
+    color: white; /* Placeholder text color */
+}
+
+.searchBox .MuiInputLabel-root.Mui-focused {
+    color: white; /* Placeholder color when focused */
+}

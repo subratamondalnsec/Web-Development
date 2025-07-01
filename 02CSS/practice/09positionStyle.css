@@ -1,0 +1,36 @@
+div{
+    border: 2px solid black;
+    display: inline-block;
+    margin: 20px;
+    height: 100px;
+    width: 100px;
+    background-color: green;
+    text-align: center;
+}
+#static{
+    background-color: yellow;
+    position: static;
+    top: 100px;
+    left: 100px;
+}
+#random{
+    background-color: aqua;
+    position: relative;
+    top: 100px;
+    left: 100px;
+}
+#Absoute{
+    background-color: red;
+    position: absolute;
+    top: 100px;
+    left: 100px;
+}
+#fixed{
+    background-color: orange;
+    position: fixed;
+    top: 100px;
+    left: 100px;
+}
+p{
+    font-size: 500px;
+}

@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* Hide default cursor */
+* {
+  cursor: none !important;
+}
+
+/* Custom cursor styles */
+.cursor {
+  pointer-events: none;
+  mix-blend-mode: normal;
+  transform: translate(-50%, -50%);
+  backdrop-filter: blur(2px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+}
+
+/* Smooth animations for menu */
+.sidebar {
+  transition: transform 0.4s ease;
+  backdrop-filter: blur(20px);
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-overlay {
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+/* Enhanced hover effects */
+a:hover, button:hover {
+  transform: scale(1.05) translateY(-2px);
+  transition: all 0.3s ease;
+}
+
+/* Menu item animations */
+.menu-item {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(99, 102, 241, 0.5);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.8);
+}
+
+/* Glassmorphism effect for cards */
+.glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}

@@ -24,7 +24,7 @@ const rateLimiter= async (req,res,next)=>{
             await redisClient.expire(3600);
         }
 
-        if(Number_of_request>5){
+        if(Number_of_request>60){
             throw new Error("Use Limit Exceeded")
         }
 

@@ -7,7 +7,7 @@ const {createComment} = require("../Controllers/commentController");
 const {createPost,getAllPosts} = require("../Controllers/postController");
 
 
-
+ 
 
 router.post("/posts/create",createPost);
 router.get("/posts",getAllPosts)

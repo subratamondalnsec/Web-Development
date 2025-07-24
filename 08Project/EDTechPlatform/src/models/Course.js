@@ -4,7 +4,7 @@ const courseSchema=new mongoose.Schema({
     courseName:{
         type:String,
     },
-    courseDescrition:{
+    courseDescription:{
         type:String,
     },
     whatYouWillLearn:{

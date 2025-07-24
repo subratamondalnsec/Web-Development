@@ -202,6 +202,68 @@ exports.login=async (req,res)=>{
 
 //changePassword
 
+exports.changePassword=async (req,res)=>{
+    try{ 
+        const {id,email} = req.user; // Extract user ID and email from the request
 
+        const {oldPassword,newPassword,confirmNewPassword}=req.body;
+        //Validate
 
+        if(!oldPassword || !newPassword || !confirmNewPassword){
+            return res.status(403).json({
+                success:false,
+                message: "All field are required",
+            });
+        }
+        if (!validateEmailAndPassword(email, newPassword, res)) {
+            return;
+        }
+        if(newPassword === oldPassword) {
+            return res.status(403).json({
+                success: false,
+                message: "New password cannot be the same as old password",
+            });
+        }
+        if(newPassword !== confirmNewPassword) {
+            return res.status(403).json({   
+                success: false,
+                message: "New password and confirm password do not match",
+            });
+        }
 
+        //check if old password is correct
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
+
+        const isMatch = await bcrypt.compare(oldPassword, user.password);
+        if (!isMatch) {
+            return res.status(403).json({
+                success: false,
+                message: "Old password is incorrect",
+            });
+        }
+
+        //hash new password
+        const hashedPassword = await bcrypt.hash(newPassword, 10);
+        user.password = hashedPassword;
+        await user.save();
+
+        return res.status(200).json({
+            success: true,
+            message: "Password changed successfully",
+        });
+    }
+     catch(err){
+        console.error(err);
+        
+        return res.status(500).json({
+            success:false,
+            message: "Internal server error",
+        })
+    }
+}

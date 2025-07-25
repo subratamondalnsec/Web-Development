@@ -1,16 +1,16 @@
 const Course= require('../models/Course');
 const User = require('../models/User');
-const Tag = require('../models/Tags');
+const Category = require('../models/Category');
 const {uploadImage}=require('../utils/ImageUploader');
 
 
 //create course handler function
 const createCourse = async (req, res) => {
     try{
-        const { courseName, courseDescription, whatYouWillLearn, price, tags } = req.body;
+        const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;
         const thumbnail = req.files.thumbnail;
         //validation
-        if (!courseName || !courseDescription || !whatYouWillLearn || !price || !tags || !thumbnail) {
+        if (!courseName || !courseDescription || !whatYouWillLearn || !price || !category || !thumbnail) {
             return res.status(400).json({
                 success: false,
                 message: "Please provide all fields"
@@ -25,12 +25,12 @@ const createCourse = async (req, res) => {
                 message: "Instructor not found"
             });
         }
-        //tag validation
-        const tagDetails = await Tag.findById(tags);
-        if (!tagDetails) {
+        //category validation
+        const categoryDetails = await Category.findById(category);
+        if (!categoryDetails) {
             return res.status(404).json({
                 success: false,
-                message: "Tag not found"
+                message: "Category not found"
             });
         }
         //upload thumbnail
@@ -49,7 +49,7 @@ const createCourse = async (req, res) => {
             instruction: instructionID,
             price,
             thumbnail: thumbnailUrl.secure_url,
-            tag: tagDetails._id,
+            category: categoryDetails._id,
         });
         //add course to instructor's courses
         User.findByIdAndUpdate(
@@ -57,9 +57,9 @@ const createCourse = async (req, res) => {
             { $push: { courses: newCourse._id } },
             { new: true }
         );
-        //tag update
-        Tag.findByIdAndUpdate(
-            tagDetails._id,
+        //category update
+        Category.findByIdAndUpdate(
+            categoryDetails._id,
             { $push: { courses: newCourse._id } },
             { new: true }
         );
@@ -87,7 +87,7 @@ const showAllCourses = async (req, res) => {
             whatYouWillLearn: true,
             price: true,
             thumbnail: true,
-            tag: true,
+            category: true,
             instruction: true
         }).populate('instruction').exec();
             

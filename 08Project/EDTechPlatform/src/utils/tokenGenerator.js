@@ -9,7 +9,7 @@ function generateToken(user) {
       accountType: user.accountType,
     },
     process.env.JWT_SECRET,
-    { expiresIn: "2h" }
+    { expiresIn: "24h" }
   );
 }
 
@@ -21,7 +21,7 @@ function handleAuthSuccess(user, res, message) {
     userObj.token = token; // add token to user object
     const Option = {
         httpOnly: true,
-        expires: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours
+        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
     };
     return res.cookie("token", token, Option).status(200).json({
         success: true,

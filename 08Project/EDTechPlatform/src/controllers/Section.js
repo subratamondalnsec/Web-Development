@@ -72,7 +72,7 @@ exports.updateSection = async (req, res) => {
         const updatedSection = await Section.findByIdAndUpdate(
             sectionId,
             { sectionName },
-            { new: true }
+             { new: true }
         );
 
         //response
@@ -89,3 +89,44 @@ exports.updateSection = async (req, res) => {
         });
     }
 }
+
+
+//delete a Section
+exports.deleteSection = async (req, res) => {
+    try {
+        //data fetch
+        const { sectionId } = req.params;
+
+        // validation Check
+        if (!sectionId) {
+            return res.status(400).json({
+                success: false,
+                message: "Section ID is required",
+                data: null,
+            });
+        }
+
+        //delete Section
+        const deletedSection = await Section.findByIdAndDelete(sectionId);
+
+        //Todo: remove sectionId from courseContent in Course model
+        await Course.updateMany(
+            { courseContent: sectionId },
+            { $pull: { courseContent: sectionId } }
+        );
+
+        //response
+        return res.status(200).json({
+            success: true,
+            message: "Section deleted successfully",
+            data: deletedSection
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Error deleting section",
+            error: error.message
+        });
+    }
+}
+

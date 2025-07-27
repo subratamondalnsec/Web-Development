@@ -1,11 +1,11 @@
 const Course= require('../models/Course');
 const User = require('../models/User');
 const Category = require('../models/Category');
-const {uploadImage}=require('../utils/ImageUploader');
+const {uploadFiles}=require('../utils/FileUploader');
 
 
 //create course handler function
-const createCourse = async (req, res) => {
+exports.createCourse = async (req, res) => {
     try{
         const { courseName, courseDescription, whatYouWillLearn, price, category } = req.body;
         const thumbnail = req.files.thumbnail;
@@ -34,7 +34,7 @@ const createCourse = async (req, res) => {
             });
         }
         //upload thumbnail
-        const thumbnailUrl = await uploadImage(thumbnail,process.env.CLOUDINARY_COURSE_FOLDER,90);
+        const thumbnailUrl = await uploadFiles(thumbnail,process.env.CLOUDINARY_COURSE_FOLDER,90);
         if (!thumbnailUrl || !thumbnailUrl.secure_url) {
             return res.status(500).json({
                 success: false,
@@ -79,7 +79,7 @@ const createCourse = async (req, res) => {
 }
 
 //get all courses handler function
-const showAllCourses = async (req, res) => {
+exports.showAllCourses = async (req, res) => {
     try {
         const allCourses = await Course.find({},{
             courseName: true,

@@ -1,6 +1,6 @@
 const cloudinary = require('cloudinary').v2;
 
-exports.uploadImage = async (file,folder,quality,height) => {
+exports.uploadFiles = async (file,folder,quality,height) => {
      try {
         const option ={folder};
         if(quality) {

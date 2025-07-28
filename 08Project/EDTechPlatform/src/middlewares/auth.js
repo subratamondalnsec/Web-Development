@@ -8,7 +8,7 @@ exports.auth=async(req,res,next)=>{
 
     try{
         //extract token
-        const token=req.cookies.token||req.body.token || req.headers("Authorization").replace("Bearer ","");
+        const token=req.cookies.token||req.body.token || (req.header("Authorization")?.startsWith("Bearer ") ? req.header("Authorization").split(" ")[1]: null);
         if(!token){
             return res.status(401).json({
                 success:false,
@@ -41,67 +41,57 @@ exports.auth=async(req,res,next)=>{
 
 
 //is Student
-exports.isStudent=async(req,res,next)=>{
-    try{
-        if(req.user.accountType!=="Student"){
-            return res.status(401).json({
-                success:false,
-                message: "Access denied , you are not a student",
-            });
-        }
-        next();
-    }
-    catch(err){
-        console.error(err);
-        return res.status(500).json({
-            success:false,
-            message: "User role cannot be verified,please try again later",
+exports.isStudent = async (req, res, next) => {
+	try {
+		const userDetails = await User.findOne({ email: req.user.email });
+
+		if (userDetails.accountType !== "Student") {
+			return res.status(401).json({
+				success: false,
+				message: "This is a Protected Route for Students",
+			});
+		}
+		next();
+	} catch (error) {
+		return res.status(500).json({ success: false, message: `User Role Can't be Verified` });
+	}
+};
+exports.isAdmin = async (req, res, next) => {
+	try {
+		const userDetails = await User.findOne({ email: req.user.email });
+
+		if (userDetails.accountType !== "Admin") {
+			return res.status(401).json({
+				success: false,
+				message: "This is a Protected Route for Admin",
+			});
+		}
+		next();
+	} catch (error) {
+		return res.status(500).json({ 
+            success: false, 
+            message: `User Role Can't be Verified` 
         });
-    }
-}
+	}
+};
+exports.isInstructor = async (req, res, next) => {
+	try {
+		const userDetails = await User.findOne({ email: req.user.email });
+		console.log(userDetails);
 
-//is instructor
-exports.isInstructor=async(req,res,next)=>{
-    try{
-        if(req.user.accountType!=="Instructor"){
-            return res.status(401).json({
-                success:false,
-                message: "Access denied , you are not an instructor",
-            });
-        }
-        next();
-    }
-    catch(err){
-        console.error(err);
-        return res.status(500).json({
-            success:false,
-            message: "User role cannot be verified,please try again later",
+		console.log(userDetails.accountType);
+
+		if (userDetails.accountType !== "Instructor") {
+			return res.status(401).json({
+				success: false,
+				message: "This is a Protected Route for Instructor",
+			});
+		}
+		next();
+	} catch (error) {
+		return res.status(500).json({ 
+            success: false, 
+            message: `User Role Can't be Verified`
         });
-    }
-}
-
-//isAdmin
-
-exports.isAdmin=async(req,res,next)=>{
-    try{
-        if(req.user.accountType!=="Admin"){
-            return res.status(401).json({
-                success:false,
-                message: "Access denied , you are not an admin",
-            });
-        }
-        next();
-    }
-    catch(err){
-        console.error(err);
-        return res.status(500).json({
-            success:false,
-            message: "User role cannot be verified,please try again later",
-        });
-    }
-}
-
-
-
-
-
+	}
+};

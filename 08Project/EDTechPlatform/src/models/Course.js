@@ -2,8 +2,12 @@ const mongoose = require("mongoose")
 
 // Define the Courses schema
 const coursesSchema = new mongoose.Schema({
-  courseName: { type: String },
-  courseDescription: { type: String },
+  courseName: { 
+      type: String 
+  },
+  courseDescription: {
+      type: String 
+    },
   instructor: {
     type: mongoose.Schema.Types.ObjectId,
     required: true,
@@ -39,11 +43,11 @@ const coursesSchema = new mongoose.Schema({
     // required: true,
     ref: "Category",
   },
-  studentsEnroled: [
+  studentsEnrolled: [
     {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "user",
+      ref: "User",
     },
   ],
   instructions: {

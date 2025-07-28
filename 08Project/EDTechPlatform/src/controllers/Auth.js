@@ -218,6 +218,7 @@ exports.sendotp = async (req, res) => {
         lowerCaseAlphabets: false,
         specialChars: false,
       })
+      result = await OTP.findOne({ otp: otp })
     }
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
@@ -258,10 +259,10 @@ exports.changePassword = async (req, res) => {
         return;
     }
     // Update password
-    const encryptedPassword = await bcrypt.hash(newPassword, 10)
+    const hashPassword = await bcrypt.hash(newPassword, 10)
     const updatedUserDetails = await User.findByIdAndUpdate(
       req.user.id,
-      { password: encryptedPassword },
+      { password: hashPassword },
       { new: true }
     )
 

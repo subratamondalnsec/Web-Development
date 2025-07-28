@@ -62,7 +62,15 @@ exports.createSubSection = async (req, res) => {
     let videoUrl = "";
 
     if (video) {
-      const uploadDetails = await uploadFiles(video, "StudyNotion");
+      // ✅ Check if video size exceeds 10MB
+      if (video.size > 10 * 1024 * 1024) {
+        return res.status(400).json({
+          success: false,
+          message: "Video file size should not exceed 10 MB.",
+        });
+      }
+
+      const uploadDetails = await uploadFiles(video, process.env.FOLDER_NAME);
       videoUrl = uploadDetails.secure_url;
     }
 
@@ -120,7 +128,16 @@ exports.updateSubSection = async (req, res) => {
       subSection.description = description
     }
     if (req.files && req.files.video !== undefined) {
-      const video = req.files.video
+      const video = req.files.video;
+
+      // ✅ Check file size
+      if (video.size > 10 * 1024 * 1024) {
+        return res.status(400).json({
+          success: false,
+          message: "Video file size should not exceed 10 MB.",
+        });
+      }
+
       const uploadDetails = await uploadFiles(
         video,
         process.env.FOLDER_NAME
@@ -189,3 +206,21 @@ exports.deleteSubSection = async (req, res) => {
     })
   }
 }
+
+
+
+/*
+Optional UX Tip:
+You can also enforce the 10MB limit client-side using HTML input attributes:
+
+<input type="file" name="video" accept="video/*" onchange="checkFileSize(this)">
+<script>
+  function checkFileSize(input) {
+    const file = input.files[0];
+    if (file && file.size > 10 * 1024 * 1024) {
+      alert("Video file size should not exceed 10 MB.");
+      input.value = ""; // clear the file
+    }
+  }
+</script>
+ */

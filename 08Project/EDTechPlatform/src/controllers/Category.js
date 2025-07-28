@@ -6,7 +6,7 @@ function getRandomInt(max) {
 exports.createCategory = async (req, res) => {
   try {
     const { name, description } = req.body
-    if (!name) {
+    if (!name || !description) {
       return res
         .status(400)
         .json({ success: false, message: "All fields are required" })
@@ -77,7 +77,7 @@ exports.categoryPageDetails = async (req, res) => {
 
     // Get courses for other categories
     const categoriesExceptSelected = await Category.find({
-      _id: { $ne: categoryId },
+      _id: { $ne: categoryId },//not equal this categoryId
     })
     let differentCategory = await Category.findOne(
       categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]

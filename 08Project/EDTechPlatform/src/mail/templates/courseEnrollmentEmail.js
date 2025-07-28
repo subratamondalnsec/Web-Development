@@ -14,7 +14,7 @@ exports.courseEnrollmentEmail = (courseName, name) => {
               color: #333333;
               margin: 0;
               padding: 0;
-          }
+            }
   
   
           .container {

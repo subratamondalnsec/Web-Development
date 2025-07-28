@@ -32,8 +32,8 @@ exports.resetPasswordToken = async (req, res) => {
     )
     console.log("DETAILS", updatedDetails)
 
-    // const url = `http://localhost:3000/update-password/${token}`
-    const url = `https://studynotion-edtech-project.vercel.app/update-password/${token}`
+    const url = `http://localhost:3000/update-password/${token}`
+    // const url = `https://studynotion-edtech-project.vercel.app/update-password/${token}`
 
     await mailSender(
       email,
@@ -66,7 +66,7 @@ exports.resetPassword = async (req, res) => {
         message: "Password and Confirm Password Does not Match",
       })
     }
-    if (!validator.isStrongPassword(Password)) {
+    if (!validator.isStrongPassword(password)) {
         return res.status(403).json({
             success: false,
             message: "Weak Password",

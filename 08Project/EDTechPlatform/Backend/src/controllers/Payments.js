@@ -11,7 +11,7 @@ const CourseProgress = require("../models/CourseProgress")
 // Capture the payment and initiate the Razorpay order
 exports.capturePayment = async (req, res) => {
   const { courses } = req.body
-  // console.log("Razorpay Key:", process.env.RAZORPAY_KEY_ID);
+  // console.log("Razorpay Key:", process.env.RAZORPAY_KEY);
   console.log("Razorpay Key:", process.env.RAZORPAY_KEY);
   console.log("Razorpay Secret:", process.env.RAZORPAY_SECRET);
 
@@ -56,7 +56,7 @@ exports.capturePayment = async (req, res) => {
   const options = {
     amount: total_amount * 100,
     currency: "INR",
-    key: process.env.RAZORPAY_KEY_ID,
+    key: process.env.RAZORPAY_KEY,
     receipt: Math.random(Date.now()).toString(),
   }
 
@@ -67,7 +67,7 @@ exports.capturePayment = async (req, res) => {
     res.json({
       success: true,
       data: paymentResponse,
-        key: process.env.RAZORPAY_KEY_ID,
+        key: process.env.RAZORPAY_KEY,
     })
   } catch (error) {
     console.log(error)

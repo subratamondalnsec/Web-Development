@@ -25,8 +25,7 @@ app.use(cookieParser());
 const PORT = process.env.PORT || 4000;
 
 const allowedOrigins = [
-  "http://localhost:3000",
-  "http://localhost:4000",
+  "http://localhost:3000",//frontend port
 ]
 
 app.use(

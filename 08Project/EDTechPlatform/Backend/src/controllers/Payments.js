@@ -12,8 +12,8 @@ const CourseProgress = require("../models/CourseProgress")
 exports.capturePayment = async (req, res) => {
   const { courses } = req.body
   // console.log("Razorpay Key:", process.env.RAZORPAY_KEY);
-  console.log("Razorpay Key:", process.env.RAZORPAY_KEY);
-  console.log("Razorpay Secret:", process.env.RAZORPAY_SECRET);
+  // console.log("Razorpay Key:", process.env.RAZORPAY_KEY);
+  // console.log("Razorpay Secret:", process.env.RAZORPAY_SECRET);
 
   const userId = req.user.id
   if (courses.length === 0) {

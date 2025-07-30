@@ -8,6 +8,7 @@ const { passwordUpdated } = require("../mail/templates/passwordUpdate")
 const Profile = require("../models/Profile")
 const {handleAuthSuccess} = require('../utils/tokenGenerator');
 require("dotenv").config()
+const validator = require("validator")
 
 // Signup Controller for Registering USers
 
@@ -119,7 +120,7 @@ exports.signup = async (req, res) => {
       accountType: accountType,
       approved: approved,
       additionalDetails: profileDetails._id,
-      image: "",
+      image: `https://api.dicebear.com/5.x/initials/svg?seed=${firstName}%20${lastName}`,
     })
 
     // token generation, user object transformation, and response
@@ -255,7 +256,7 @@ exports.changePassword = async (req, res) => {
         .json({ success: false, message: "The password is incorrect" })
     }
 
-    if (!validateEmailAndPassword(email, newPassword, res)) {
+    if (!validateEmailAndPassword(userDetails.email, newPassword, res)) {
         return;
     }
     // Update password

@@ -21,7 +21,7 @@ function handleAuthSuccess(user, res, message) {
     userObj.token = token; // add token to user object
     const Option = {
         httpOnly: true,
-        expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000), // 3 days
+        expires: new Date(Date.now() + 24 * 60 * 60 * 1000), // 1 days
     };
     return res.cookie("token", token, Option).status(200).json({
         success: true,
